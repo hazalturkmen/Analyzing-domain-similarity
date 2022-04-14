@@ -48,22 +48,21 @@ def step_step_process(fname, out):
     article4 = []
 
     for i in tqdm(range(len(article3))):
-        for y in range(0, len(article3[i])):
-            if (trstop.trstop.is_stop_word(article3[i][y]) == False):
-                # print(word)
-                article4.append(word)
+        if (trstop.trstop.is_stop_word(article3[i]) == False):
+            article4.append(article3[i])
 
     # step5 remove again empty words
 
     print("step5: Removing empty words again...")
-
+    #print(article4)
     article5 = [x for x in article4 if x]
+
 
     # step6 find co-occurrence
     print("step6: Finding co-occurrence...")
 
-    article6 = list(itertools.chain.from_iterable(article5))
-    count = Counter(article6)
+
+    count = Counter(article5)
     ordered_count = OrderedDict(count.most_common())
 
     # step7 print to xlsx file
